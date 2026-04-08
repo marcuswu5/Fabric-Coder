@@ -1,0 +1,5 @@
+# Ordered list of eval pairs (YAML files in this directory)
+pairs:
+  - int_point.yaml
+  - food_values.yaml
+  - regen_health.yaml

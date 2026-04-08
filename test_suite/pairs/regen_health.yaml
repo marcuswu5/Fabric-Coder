@@ -1,0 +1,36 @@
+id: regen_health
+source: appleskin
+difficulty: hard
+target:
+  package: com.fabriccoder.testsuite
+  class: RegenHealthEstimator
+  primary_file: src/main/java/com/fabriccoder/testsuite/RegenHealthEstimator.java
+reference_implementation: src/main/java/com/fabriccoder/testsuite/RegenHealthEstimator.java
+verifier:
+  type: junit
+  test_class: com.fabriccoder.testsuite.RegenHealthEstimatorTest
+prompt: |
+  Implement `com.fabriccoder.testsuite.RegenHealthEstimator` as a final class with a private constructor.
+
+  Public constants (exact values): `REGEN_EXHAUSTION_INCREMENT = 6.0f`, `MAX_EXHAUSTION = 4.0f`.
+
+  Public static method:
+  `float getEstimatedHealthIncrement(int foodLevel, float saturationLevel, float exhaustionLevel)`
+
+  Behavior (Minecraft-style natural regen simulation):
+  - If `exhaustionLevel` or `saturationLevel` is not finite (NaN or infinite), return 0.
+  - While `foodLevel >= 18`:
+    - While `exhaustionLevel > MAX_EXHAUSTION`: subtract `MAX_EXHAUSTION` from exhaustion; if saturation > 0 then
+      `saturationLevel = max(saturationLevel - 1, 0)`, else `foodLevel -= 1`.
+    - If `foodLevel >= 20` AND `Float.compare(saturationLevel, Float.MIN_NORMAL) > 0`:
+      - Let `limitedSaturationLevel = min(saturationLevel, REGEN_EXHAUSTION_INCREMENT)`.
+      - Let `exhaustionUntilAboveMax = Math.nextUp(MAX_EXHAUSTION) - exhaustionLevel`.
+      - Let `numIterationsUntilAboveMax = max(1, ceil(exhaustionUntilAboveMax / limitedSaturationLevel))`.
+      - Add `(limitedSaturationLevel / REGEN_EXHAUSTION_INCREMENT) * numIterationsUntilAboveMax` to health.
+      - Add `limitedSaturationLevel * numIterationsUntilAboveMax` to exhaustionLevel.
+    - Else if `foodLevel >= 18`: add 1 to health and add `REGEN_EXHAUSTION_INCREMENT` to exhaustionLevel.
+  - Return accumulated health.
+
+  Match floating-point semantics carefully (same order of operations as typical Java code).
+
+  Output only the full contents of `RegenHealthEstimator.java` in one markdown code fence.

@@ -1,0 +1,16 @@
+id: int_point
+source: appleskin
+difficulty: trivial
+target:
+  package: com.fabriccoder.testsuite
+  class: IntPoint
+  primary_file: src/main/java/com/fabriccoder/testsuite/IntPoint.java
+reference_implementation: src/main/java/com/fabriccoder/testsuite/IntPoint.java
+verifier:
+  type: junit
+  test_class: com.fabriccoder.testsuite.IntPointTest
+prompt: |
+  Implement class `IntPoint` in package `com.fabriccoder.testsuite` with two public fields `int x` and `int y`
+  (default constructor is sufficient).
+
+  Output only the full contents of `IntPoint.java` in one markdown code fence.

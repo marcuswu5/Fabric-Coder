@@ -1,0 +1,25 @@
+# Model-eval pair: prompt + in-repo reference implementation + verifier tests
+id: food_values
+source: appleskin
+difficulty: easy
+target:
+  package: com.fabriccoder.testsuite
+  class: FoodValues
+  primary_file: src/main/java/com/fabriccoder/testsuite/FoodValues.java
+reference_implementation: src/main/java/com/fabriccoder/testsuite/FoodValues.java
+verifier:
+  type: junit
+  test_class: com.fabriccoder.testsuite.FoodValuesTest
+prompt: |
+  Implement class `FoodValues` in package `com.fabriccoder.testsuite`.
+
+  Fields (public final): `int hunger`, `float saturationModifier`.
+
+  Constructor: `FoodValues(int hunger, float saturationModifier)`.
+
+  Method `float getSaturationIncrement()` returns `hunger * saturationModifier * 2f`.
+
+  Override `equals` and `hashCode` so two instances are equal iff hunger and saturationModifier match
+  (use `Float.compare` for the float field in equals; use `Float.floatToIntBits` in hashCode like standard practice).
+
+  Output only the full contents of `FoodValues.java` in one markdown code fence.

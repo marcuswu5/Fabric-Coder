@@ -1,1 +1,3 @@
 .env
+test_suite/build/
+test_suite/.gradle/
