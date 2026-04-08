@@ -247,7 +247,8 @@ def generate_completion_hf(
     else:
         text = prompt
 
-    inputs = tokenizer(text, return_tensors="pt").to(device)
+    inputs = tokenizer(text, return_tensors="pt")
+    inputs = {k: v.to(device) for k, v in inputs.items()}
     with torch.inference_mode():
         out = model.generate(
             **inputs,

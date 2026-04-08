@@ -22,3 +22,7 @@ chmod +x gradlew
 ```
 
 Gradle downloads itself on first run. All tests should pass with the checked-in sources.
+
+## Colab (`FineTuning.ipynb`)
+
+Use the **test_suite** cells at the end of the notebook: **Setup** → **load model and tokenizer** → **Benchmark**.
